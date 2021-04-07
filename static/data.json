@@ -1,0 +1,22 @@
+[
+  {
+    "date": "2020-04-01",
+    "totalCost": 123.45,
+    "comment": "One hundred twenty three"
+  },
+  {
+    "date": "2020-04-03",
+    "totalCost": 223.33,
+    "comment": "Two hundred twenty three"
+  },
+  {
+    "date": "2020-12-31",
+    "totalCost": 1023,
+    "comment": "One thousand twenty three (exactly)"
+  },
+  {
+    "date": "2021-04-30",
+    "totalCost": 90310390,
+    "comment": "Quite a large number!"
+  }
+]

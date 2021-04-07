@@ -1,0 +1,13 @@
+{
+  "execMap": {
+    "js": "node -r esm"
+  },
+  "env": {
+    "DEBUG": "stm:*",
+    "MONGOOSE_DEBUG": "true",
+    "DEBUG_NAMESPACE": "stm:xls",
+    "ERROR_NAMESPACE": "stm:xls:error",
+    "PORT": "3300"
+  },
+  "watch":  ["src"]
+}

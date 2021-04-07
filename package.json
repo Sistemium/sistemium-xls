@@ -1,0 +1,31 @@
+{
+  "name": "sistemium-xls",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "api": "nodemon src/api.js",
+    "build": "rm -rf dist && cp -rv src dist && cp package.json dist"
+  },
+  "keywords": ["xlsx", "nodejs", "http"],
+  "author": "Sistemium UAB",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/router": "^10.0.0",
+    "content-disposition": "^0.5.3",
+    "esm": "^3.2.25",
+    "exceljs": "^4.2.1",
+    "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-logger": "^3.2.1",
+    "lodash": "^4.17.21",
+    "sistemium-debug": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.0",
+    "mocha": "^8.3.0",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.3"
+  }
+}
