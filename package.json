@@ -1,6 +1,6 @@
 {
   "name": "sistemium-xls",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "src/xlsx.js",
   "scripts": {
@@ -8,7 +8,11 @@
     "api": "nodemon src/api.js",
     "build": "rm -rf dist && cp -rv src dist && cp package.json dist"
   },
-  "keywords": ["xlsx", "nodejs", "http"],
+  "keywords": [
+    "xlsx",
+    "nodejs",
+    "http"
+  ],
   "author": "Sistemium UAB",
   "license": "ISC",
   "dependencies": {
