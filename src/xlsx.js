@@ -11,7 +11,12 @@ export default function (data = [], schema = {}) {
   debug('columns', map(columns, 'key'), 'rows:', data.length);
 
   const workbook = new ExcelJS.Workbook();
-  addWorksheetToWorkbook(workbook, name, columns, data);
+  const { sheets = [{ name }] } = schema;
+  const sheetsData = schema.sheets ? data : [data];
+
+  sheets.forEach((sheet, index) => {
+    addWorksheetToWorkbook(workbook, sheet.name, columns, sheetsData[index]);
+  });
 
   return workbook;
 }

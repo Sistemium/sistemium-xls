@@ -1,0 +1,23 @@
+{
+  "sheets": [
+    {
+      "name": "Sample sheet 1"
+    },
+    {
+      "name": "Sample sheet 2"
+    }
+  ],
+  "columns": [
+    {
+      "key": "date"
+    },
+    {
+      "key": "totalCost",
+      "title": "Total Cost"
+    },
+    {
+      "key": "comment",
+      "width": 35
+    }
+  ]
+}
