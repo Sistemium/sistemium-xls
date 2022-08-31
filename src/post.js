@@ -1,9 +1,8 @@
-import xlsx from './xlsx';
 import contentDisposition from 'content-disposition';
 import find from 'lodash/find';
+import xlsx from './xlsx';
 
 export default async function (ctx) {
-
   const { data, schema, fileName } = ctx.request.body;
 
   ctx.assert(Array.isArray(data), 400, 'data must be array');
@@ -17,7 +16,6 @@ export default async function (ctx) {
   }
   ctx.set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
   ctx.body = buffer;
-
 }
 
 function validSchema(schema = {}) {

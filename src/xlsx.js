@@ -7,7 +7,6 @@ import log from 'sistemium-debug';
 const { debug } = log('xlsx');
 
 export default function (data = [], schema = {}) {
-
   const { name = 'Sheet1', columns = [] } = schema;
   debug('columns', map(columns, 'key'), 'rows:', data.length);
 
@@ -15,22 +14,19 @@ export default function (data = [], schema = {}) {
   addWorksheetToWorkbook(workbook, name, columns, data);
 
   return workbook;
-
 }
 
 function addWorksheetToWorkbook(workbook, name, columns, data) {
-
   const worksheet = workbook.addWorksheet(name);
   worksheet.columns = columns.map(mapColumn);
 
   const header = worksheet.getRow(1);
-  header.alignment = { vertical: 'middle', horizontal: 'center' }
+  header.alignment = { vertical: 'middle', horizontal: 'center' };
   header.font = { bold: true };
 
   worksheet.addRows(data);
 
   return workbook;
-
 }
 
 function mapColumn({ title, key, width }) {
