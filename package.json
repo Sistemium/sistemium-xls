@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "",
   "main": "src/xlsx.js",
+  "files": ["src"],
   "scripts": {
     "lint": "eslint src --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
