@@ -9,13 +9,19 @@ const { debug } = log('xlsx');
 export default function (data = [], schema = {}) {
 
   const { name = 'Sheet1', columns = [] } = schema;
+  debug('columns', map(columns, 'key'), 'rows:', data.length);
 
   const workbook = new ExcelJS.Workbook();
+  addWorksheetToWorkbook(workbook, name, columns, data);
+
+  return workbook;
+
+}
+
+function addWorksheetToWorkbook(workbook, name, columns, data) {
+
   const worksheet = workbook.addWorksheet(name);
-
   worksheet.columns = columns.map(mapColumn);
-
-  debug('columns', map(columns, 'key'), 'rows:', data.length);
 
   const header = worksheet.getRow(1);
   header.alignment = { vertical: 'middle', horizontal: 'center' }
@@ -26,7 +32,6 @@ export default function (data = [], schema = {}) {
   return workbook;
 
 }
-
 
 function mapColumn({ title, key, width }) {
   return {
