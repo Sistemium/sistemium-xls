@@ -1,9 +1,11 @@
 {
   "name": "sistemium-xls",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "src/xlsx.js",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "scripts": {
     "lint": "eslint src --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
