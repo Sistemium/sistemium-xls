@@ -11,18 +11,19 @@ export default function (data = [], schema = {}) {
   debug('columns', map(columns, 'key'), 'rows:', data.length);
 
   const workbook = new ExcelJS.Workbook();
-  const { sheets = [{ name }] } = schema;
+  const { sheets = [{ name, ...schema }] } = schema;
   const sheetsData = schema.sheets ? data : [data];
 
-  sheets.forEach((sheet, index) => {
-    addWorksheetToWorkbook(workbook, sheet.name, columns, sheetsData[index]);
+  sheets.forEach((sheetSchema, index) => {
+    addWorksheetToWorkbook(workbook, sheetSchema, sheetsData[index]);
   });
 
   return workbook;
 }
 
-function addWorksheetToWorkbook(workbook, name, columns, data) {
-  const worksheet = workbook.addWorksheet(name);
+function addWorksheetToWorkbook(workbook, sheetSchema, data) {
+  const { name, columns, headRows, pageSetup, grid } = sheetSchema;
+  const worksheet = workbook.addWorksheet(name, { pageSetup });
   worksheet.columns = columns.map(mapColumn);
 
   const header = worksheet.getRow(1);
@@ -30,6 +31,52 @@ function addWorksheetToWorkbook(workbook, name, columns, data) {
   header.font = { bold: true };
 
   worksheet.addRows(data);
+
+  const columnCount = columns.length;
+
+  data.forEach((r, row) => {
+    columns.forEach((c, col) => {
+      const cell = worksheet.getCell(row + 2, col + 1);
+      if (grid) {
+        cell.border = {
+          top: grid,
+          left: grid,
+          bottom: grid,
+          right: grid,
+        };
+      }
+      if (c.wrapText || (sheetSchema.wrapText && c.width)) {
+        cell.alignment = { wrapText: true };
+      }
+    });
+  });
+
+  if (headRows) {
+    const headAlignment = { vertical: 'top', horizontal: 'left', wrapText: true };
+    const headBorder = { bottom: { style: 'thin' } };
+    headRows.forEach((headRow, idx) => {
+      const row = idx + 1;
+      const { label, value, dataType, numFmt, title } = headRow;
+      worksheet.insertRow(row, [label || title, dataType === 'date' ? new Date(value) : value]);
+      if (value !== undefined) {
+        const cell = worksheet.getCell(row, 2);
+        cell.alignment = headAlignment;
+        cell.border = headBorder;
+        const labelCell = worksheet.getCell(row, 1);
+        labelCell.alignment = headAlignment;
+        labelCell.border = headBorder
+        if (numFmt) {
+          cell.numFmt = numFmt;
+        }
+        return;
+      } else if (title) {
+        const cell = worksheet.getCell(row, 1);
+        cell.alignment = { vertical: 'middle', horizontal: 'center' };
+        cell.font = { bold: true, size: 25, name: 'Arial' };
+      }
+      worksheet.mergeCells(row, 1, row, columnCount);
+    });
+  }
 
   return workbook;
 }
