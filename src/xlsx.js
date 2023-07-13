@@ -58,7 +58,7 @@ function addWorksheetToWorkbook(workbook, sheetSchema, data) {
       const row = idx + 1;
       const { label, value, dataType, numFmt, title } = headRow;
       worksheet.insertRow(row, [label || title, dataType === 'date' ? new Date(value) : value]);
-      if (value !== undefined) {
+      if (label || value !== undefined) {
         const cell = worksheet.getCell(row, 2);
         cell.alignment = headAlignment;
         cell.border = headBorder;
